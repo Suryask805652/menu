@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>STACKLY ARCHITECH STUDIO | Login & Signup</title>
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+<!-- Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+:root {
+  --gold: #e6c200;
+  --black: #0a0a0a;
+  --dark: #111111;
+  --white: #ffffff;
+  --glass: rgba(255,255,255,0.08);
+  --blur: blur(20px);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Outfit", sans-serif;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: var(--black);
+  overflow: hidden;
+}
+
+/* ===== Animated Background ===== */
+.bg-structure {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: url("https://cdn.dribbble.com/users/255512/screenshots/16404872/media/d9075b34b43dfb61753160c19481d6b0.gif") center/cover no-repeat;
+  opacity: 0.45;
+  animation: zoomArchitect 20s infinite alternate ease-in-out;
+  z-index: 0;
+}
+@keyframes zoomArchitect {
+  from { transform: scale(1); }
+  to { transform: scale(1.1); }
+}
+
+/* ===== Main Container ===== */
+.auth-box {
+  position: relative;
+  width: 900px;
+  height: 560px;
+  display: flex;
+  border-radius: 25px;
+  overflow: hidden;
+  box-shadow: 0 0 40px rgba(89, 199, 199, 0.7);
+  z-index: 1;
+}
+
+/* ===== Left Side (Brand Panel) ===== */
+.brand-panel {
+  flex: 1;
+  background: linear-gradient(135deg, rgba(0,0,0,0.7), rgba(20,20,20,0.8));
+  backdrop-filter: blur(10px);
+  color: var(--gold);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 30px;
+}
+
+.brand-panel h1 {
+  font-size: 2.3rem;
+  letter-spacing: 1px;
+}
+
+.brand-panel p {
+  color: #d1d1d1;
+  font-size: 1rem;
+  margin-top: 10px;
+  line-height: 1.6;
+}
+
+.brand-panel img {
+  width: 180px;
+  margin-top: 25px;
+  opacity: 0.8;
+}
+
+/* ===== Right Side (Form Section) ===== */
+.auth-form {
+  flex: 1;
+  background: var(--glass);
+  backdrop-filter: var(--blur);
+  padding: 40px 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: all 0.6s ease-in-out;
+  position: relative;
+  overflow: hidden;
+}
+
+.auth-form h2 {
+  color: var(--white);
+  font-size: 1.8rem;
+  text-align: center;
+  margin-bottom: 25px;
+  background: linear-gradient(90deg, var(--block), #010d0f);
+  --webkit-background-clip: text;
+  
+}
+
+.field {
+  position: relative;
+  margin: 15px 0;
+}
+
+.field input {
+  width: 100%;
+  padding: 12px 45px 12px 15px;
+  border: none;
+  border-radius: 8px;
+  background: rgba(234, 226, 226, 0.12);
+  color: var(--white);
+  font-size: 1rem;
+  outline: none;
+  transition: 0.3s;
+}
+
+.field input:focus {
+  background: rgba(255,255,255,0.25);
+  box-shadow: 0 0 8px var(--gold);
+}
+
+.field i {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--gold);
+}
+
+/* ===== Buttons ===== */
+.btn-main {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(90deg, var(--gold), #f5f5f5);
+  color: #1a1a1a;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.4s;
+  margin-top: 10px;
+}
+
+.btn-main:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px var(--gold);
+}
+
+.btn-home {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  background: transparent;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-home:hover {
+  background: var(--gold);
+  color: var(--black);
+  box-shadow: 0 0 10px var(--gold);
+}
+
+/* ===== Switch Text ===== */
+.switch-note {
+  text-align: center;
+  color: #ccc;
+  font-size: 0.9rem;
+  margin-top: 20px;
+}
+
+.switch-note span {
+  color: var(--gold);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* ===== Sliding Animation ===== */
+#form-signup {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  width: 100%;
+  height: 100%;
+  transition: all 0.6s ease-in-out;
+}
+
+.auth-box.signup-mode #form-signup {
+  left: 0;
+}
+.auth-box.signup-mode #form-login {
+  left: -100%;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .auth-box {
+    flex-direction: column;
+    width: 90%;
+    height: auto;
+  }
+
+  .brand-panel {
+    padding: 20px;
+  }
+
+  .auth-form {
+    padding: 30px 25px;
+  }
+}
+
+@media (max-width: 480px) {
+  .brand-panel h1 {
+    font-size: 1.6rem;
+  }
+
+  .auth-form h2 {
+    font-size: 1.5rem;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="bg-structure"></div>
+
+<div class="auth-box" id="authBox">
+  <!-- Left: Brand Panel -->
+  <div class="brand-panel">
+    <h1>STACKLY ARCHITECH STUDIO</h1>
+    <p>Designing dreams into structural reality.<br>Login or Join the journey of modern architecture.</p>
+    <img src="logo.png" alt="logo">
+  </div>
+
+  <!-- Right: Login Form -->
+  <div class="auth-form" id="form-login">
+    <button class="btn-home" onclick="goHome()">🏠 Back to Home</button>
+    <h2>Welcome Back 👋</h2>
+    <div class="field">
+      <input type="email" placeholder="Email" required>
+      <i class="fa fa-envelope"></i>
+    </div>
+    <div class="field">
+      <input type="password" placeholder="Password" required>
+      <i class="fa fa-lock"></i>
+    </div>
+    <button class="btn-main">Login</button>
+    <p class="switch-note">Don’t have an account? <span id="switchSignup">Sign up</span></p>
+  </div>
+
+  <!-- Signup Form -->
+  <div class="auth-form" id="form-signup">
+    <button class="btn-home" onclick="goHome()">🏠 Back to Home</button>
+    <h2>Create Account ✨</h2>
+    <div class="field">
+      <input type="text" placeholder="Full Name" required>
+      <i class="fa fa-user"></i>
+    </div>
+    <div class="field">
+      <input type="email" placeholder="Email" required>
+      <i class="fa fa-envelope"></i>
+    </div>
+    <div class="field">
+      <input type="password" placeholder="Password" required>
+      <i class="fa fa-lock"></i>
+    </div>
+    <button class="btn-main">Sign Up</button>
+    <p class="switch-note">Already have an account? <span id="switchLogin">Login</span></p>
+  </div>
+</div>
+
+<script>
+const authBox = document.getElementById("authBox");
+const toSignup = document.getElementById("switchSignup");
+const toLogin = document.getElementById("switchLogin");
+
+toSignup.addEventListener("click", () => {
+  authBox.classList.add("signup-mode");
+});
+
+toLogin.addEventListener("click", () => {
+  authBox.classList.remove("signup-mode");
+});
+
+function goHome() {
+  window.location.href = "index.html"; // change to your homepage
+}
+</script>
+
+</body>
+</html>

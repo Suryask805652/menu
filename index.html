@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>STACKLY ARCHITECH STUDIO — Luxury Design & Innovation</title>
+
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    :root {
+      --dark-bg: #0a0f1f;
+      --deep-blue: #1a1f35;
+      --accent: #5b21b6;
+      --highlight: #06b6d4;
+      --gold: #facc15;
+      --silver: #e5e7eb;
+      --white: #ffffff;
+      --glass: rgba(255, 255, 255, 0.08);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { scroll-behavior: smooth; overflow-x: hidden; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: radial-gradient(circle at top, #0f172a 0%, #020617 100%);
+      color: var(--white);
+    }
+
+    /* ===== HEADER ===== */
+    header {
+      position: relative;
+      background: linear-gradient(135deg, rgba(10,15,31,0.9), rgba(26,31,53,0.95)),
+        url('https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat;
+      color: var(--white);
+      overflow: hidden;
+    }
+
+    header::after {
+      content: "";
+      position: absolute;
+      top: -100%;
+      left: -100%;
+      width: 300%;
+      height: 300%;
+      background: conic-gradient(from 0deg, var(--highlight), var(--accent), var(--gold), var(--highlight));
+      opacity: 0.08;
+      animation: rotateGlow 20s linear infinite;
+    }
+
+    @keyframes rotateGlow {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 25px 8vw;
+      position: relative;
+      z-index: 5;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: var(--gold);
+      text-shadow: 0 0 10px rgba(250,204,21,0.5);
+    }
+
+    .logo img {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      box-shadow: 0 0 15px var(--highlight);
+      animation: pulseLogo 3s infinite alternate;
+    }
+
+    @keyframes pulseLogo {
+      from { transform: scale(1); box-shadow: 0 0 10px var(--highlight); }
+      to { transform: scale(1.05); box-shadow: 0 0 25px var(--accent); }
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 500;
+      position: relative;
+      transition: 0.3s;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 0;
+      height: 2px;
+      background: var(--gold);
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover::after { width: 100%; }
+    .nav-links a:hover { color: var(--gold); }
+
+    .hamburger {
+      display: none;
+      font-size: 2rem;
+      color: var(--white);
+      cursor: pointer;
+      z-index: 1000;
+    }
+
+    /* ===== HERO ===== */
+    .banner1 {
+      text-align: center;
+      padding: 140px 10vw 100px;
+      position: relative;
+      z-index: 2;
+      backdrop-filter: blur(2px);
+      animation: fadeIn 2s ease;
+    }
+
+    .banner1 h1 {
+      font-size: 3.2rem;
+      font-weight: 700;
+      background: linear-gradient(90deg, var(--gold), var(--highlight));
+      --webkit-background-clip: text;
+      --webkit-text-fill-color: transparent;
+      animation: slideUp 1.2s ease-out;
+    }
+
+    .banner1 p {
+      color: var(--silver);
+      font-size: 1.2rem;
+      margin-top: 10px;
+      margin-bottom: 30px;
+      animation: fadeIn 2s ease-in;
+    }
+
+    .banner1 button {
+      background: linear-gradient(90deg, var(--highlight), var(--accent));
+      border: none;
+      padding: 14px 40px;
+      color: var(--white);
+      font-weight: 600;
+      border-radius: 35px;
+      cursor: pointer;
+      transition: all 0.4s ease;
+      box-shadow: 0 0 20px rgba(6,182,212,0.6);
+    }
+
+    .banner1 button:hover {
+      transform: scale(1.08);
+      box-shadow: 0 0 35px rgba(139,92,246,0.8);
+      background: linear-gradient(90deg, var(--gold), var(--accent));
+    }
+
+    /* ===== SLIDER ===== */
+    .slider {
+      position: relative;
+      width: 90%;
+      max-width: 1100px;
+      height: 400px;
+      margin: 100px auto;
+      border-radius: 25px;
+      overflow: hidden;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+    }
+
+    .slide {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      opacity: 0;
+      transition: opacity 1.5s ease-in-out;
+    }
+
+    .slide.active { opacity: 1; }
+
+    .slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scale(1.1);
+      transition: transform 6s ease-in-out;
+    }
+
+    .slide.active img { transform: scale(1); }
+
+    /* ===== ABOUT ===== */
+    .about {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      max-width: 1100px;
+      margin: 100px auto;
+      gap: 40px;
+      padding: 0 6vw;
+      animation: fadeIn 2s ease-in;
+    }
+
+    .about img {
+      flex: 1;
+      border-radius: 20px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+    }
+
+    .about-content {
+      flex: 1;
+      min-width: 300px;
+      animation: slideUp 1.2s ease-in-out;
+    }
+
+    .about-content h2 {
+      font-size: 2.2rem;
+      color: var(--gold);
+      margin-bottom: 15px;
+    }
+
+    .about-content p {
+      color: var(--silver);
+      line-height: 1.8;
+    }
+
+    /* ===== CONTACT ===== */
+    .contact {
+      background: linear-gradient(135deg, var(--accent), var(--highlight));
+      text-align: center;
+      padding: 80px 6vw;
+      border-radius: 25px;
+      margin: 100px auto;
+      max-width: 1000px;
+      box-shadow: 0 0 50px rgba(6,182,212,0.5);
+      animation: glowContact 4s infinite alternate;
+    }
+
+    @keyframes glowContact {
+      from { box-shadow: 0 0 25px rgba(6,182,212,0.3); }
+      to { box-shadow: 0 0 50px rgba(250,204,21,0.7); }
+    }
+
+    .contact h2 { font-size: 2rem; margin-bottom: 10px; }
+    .contact button {
+      margin-top: 20px;
+      padding: 12px 35px;
+      background: var(--white);
+      color: var(--accent);
+      border: none;
+      border-radius: 25px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .contact button:hover {
+      transform: scale(1.08);
+      background: var(--gold);
+      color: var(--dark-bg);
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--deep-blue);
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--silver);
+      margin-top: 100px;
+    }
+
+    .footer-social {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      margin: 20px 0;
+    }
+
+    .footer-social a {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      background: var(--glass);
+      color: var(--gold);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.4s ease;
+      font-size: 1.3rem;
+      backdrop-filter: blur(10px);
+    }
+
+    .footer-social a:hover {
+      transform: translateY(-6px);
+      background: var(--highlight);
+      color: var(--white);
+      box-shadow: 0 0 20px rgba(6,182,212,0.8);
+    }
+
+    /* ===== MOBILE MENU ===== */
+    @media (max-width: 768px) {
+      .nav-links {
+        flex-direction: column;
+        position: fixed;
+        top: 0;
+        right: -100%;
+        height: 100vh;
+        width: 70vw;
+        background: rgba(15,23,42,0.95);
+        backdrop-filter: blur(15px);
+        padding: 100px 40px;
+        transition: right 0.5s ease-in-out;
+        z-index: 999;
+        box-shadow: -5px 0 25px rgba(0,0,0,0.5);
+      }
+
+      .nav-links.show { right: 0; }
+
+      .nav-links a {
+        color: var(--white);
+        font-size: 1.2rem;
+        padding: 15px 0;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+        text-align: center;
+      }
+
+      .nav-links a:hover {
+        color: var(--gold);
+        background: rgba(255,255,255,0.1);
+        border-radius: 8px;
+      }
+
+      .hamburger { display: block; }
+      .about { flex-direction: column; text-align: center; }
+    }
+
+    /* ===== ANIMATIONS ===== */
+    @keyframes slideUp {
+      from { transform: translateY(40px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <nav>
+      <div class="logo"><img src="logo.png" alt="logo" /> STACKLY ARCHITECH STUDIO</div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="why.html">Why Us</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="login.html">login</a></li>
+      </ul>
+      <div class="hamburger"><i class="fas fa-bars"></i></div>
+    </nav>
+
+    <section class="banner1">
+      <h1>Designing Dreams into Reality</h1>
+      <p>Architectural Brilliance — Crafted with Passion, Precision & Innovation</p>
+      <button onclick="window.location.href='projects.html'">Explore Projects</button>
+    </section>
+  </header>
+
+  <section class="slider">
+    <div class="slide active"><img src="luxury.png" alt="slide1"></div>
+    <div class="slide"><img src="skyline.png" alt="slide2"></div>
+    <div class="slide"><img src="techhub.png" alt="slide3"></div>
+  </section>
+
+  <section class="about">
+    <img src="eco.png" alt="about">
+    <div class="about-content">
+      <h2>Building Landmarks of the Future</h2>
+      <p>At STACKLY, we combine innovation with aesthetics, crafting designs that stand the test of time. Our approach blends sustainability, creativity, and engineering precision — shaping tomorrow’s skylines with today’s imagination.</p>
+    </div>
+  </section>
+
+  <section class="contact">
+    <h2>Let’s Build Something Extraordinary</h2>
+    <p>Partner with STACKLY’s elite architects to create spaces that inspire and endure.</p>
+    <button onclick="window.location.href='contact.html'">Contact Us</button>
+  </section>
+
+  <footer>
+    <h3>Connect With Us</h3>
+    <div class="footer-social">
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-facebook-f"></i></a>
+      <a href="#"><i class="fab fa-whatsapp"></i></a>
+      <a href="#"><i class="fab fa-linkedin-in"></i></a>
+    </div>
+    <p>© 2025 STACKLY ARCHITECH STUDIO | All Rights Reserved</p>
+  </footer>
+
+  <script>
+    // Hamburger menu
+    const hamburger = document.querySelector(".hamburger");
+    const navLinks = document.querySelector(".nav-links");
+    hamburger.addEventListener("click", () => {
+      navLinks.classList.toggle("show");
+      hamburger.innerHTML = navLinks.classList.contains("show")
+        ? '<i class="fas fa-times"></i>'
+        : '<i class="fas fa-bars"></i>';
+    });
+
+    // Close menu on link click
+    document.querySelectorAll(".nav-links a").forEach(link => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("show");
+        hamburger.innerHTML = '<i class="fas fa-bars"></i>';
+      });
+    });
+
+    // Image slider
+    const slides = document.querySelectorAll(".slide");
+    let index = 0;
+    setInterval(() => {
+      slides[index].classList.remove("active");
+      index = (index + 1) % slides.length;
+      slides[index].classList.add("active");
+    }, 4000);
+  </script>
+</body>
+</html>
